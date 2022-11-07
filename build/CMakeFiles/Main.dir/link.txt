@@ -1,0 +1,1 @@
+/usr/bin/g++  -g -pg -pthread -O2 -g -rdynamic CMakeFiles/Main.dir/main.cpp.o -o ../bin/Main  ../lib/libmysrc.a -levent 

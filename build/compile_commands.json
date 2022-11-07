@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/number/SimplyHttpServerBS/build",
+  "command": "/usr/bin/g++  -I/home/number/SimplyHttpServerBS/include  -g -pg -pthread -O2 -g -std=gnu++2a -o CMakeFiles/Main.dir/main.cpp.o -c /home/number/SimplyHttpServerBS/main.cpp",
+  "file": "/home/number/SimplyHttpServerBS/main.cpp"
+},
+{
+  "directory": "/home/number/SimplyHttpServerBS/build/src",
+  "command": "/usr/bin/g++  -I/home/number/SimplyHttpServerBS/include  -g -pg -pthread -O2 -g -Wall -Wextra -pedantic -Werror -std=gnu++2a -o CMakeFiles/mysrc.dir/Log.cpp.o -c /home/number/SimplyHttpServerBS/src/Log.cpp",
+  "file": "/home/number/SimplyHttpServerBS/src/Log.cpp"
+},
+{
+  "directory": "/home/number/SimplyHttpServerBS/build/src",
+  "command": "/usr/bin/g++  -I/home/number/SimplyHttpServerBS/include  -g -pg -pthread -O2 -g -Wall -Wextra -pedantic -Werror -std=gnu++2a -o CMakeFiles/mysrc.dir/MLibEvent.cpp.o -c /home/number/SimplyHttpServerBS/src/MLibEvent.cpp",
+  "file": "/home/number/SimplyHttpServerBS/src/MLibEvent.cpp"
+}
+]
