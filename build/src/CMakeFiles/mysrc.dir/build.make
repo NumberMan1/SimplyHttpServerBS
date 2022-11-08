@@ -102,19 +102,34 @@ src/CMakeFiles/mysrc.dir/MLibEvent.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mysrc.dir/MLibEvent.cpp.s"
 	cd /home/number/SimplyHttpServerBS/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/number/SimplyHttpServerBS/src/MLibEvent.cpp -o CMakeFiles/mysrc.dir/MLibEvent.cpp.s
 
+src/CMakeFiles/mysrc.dir/Pub.cpp.o: src/CMakeFiles/mysrc.dir/flags.make
+src/CMakeFiles/mysrc.dir/Pub.cpp.o: ../src/Pub.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/number/SimplyHttpServerBS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/mysrc.dir/Pub.cpp.o"
+	cd /home/number/SimplyHttpServerBS/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mysrc.dir/Pub.cpp.o -c /home/number/SimplyHttpServerBS/src/Pub.cpp
+
+src/CMakeFiles/mysrc.dir/Pub.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mysrc.dir/Pub.cpp.i"
+	cd /home/number/SimplyHttpServerBS/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/number/SimplyHttpServerBS/src/Pub.cpp > CMakeFiles/mysrc.dir/Pub.cpp.i
+
+src/CMakeFiles/mysrc.dir/Pub.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mysrc.dir/Pub.cpp.s"
+	cd /home/number/SimplyHttpServerBS/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/number/SimplyHttpServerBS/src/Pub.cpp -o CMakeFiles/mysrc.dir/Pub.cpp.s
+
 # Object files for target mysrc
 mysrc_OBJECTS = \
 "CMakeFiles/mysrc.dir/Log.cpp.o" \
-"CMakeFiles/mysrc.dir/MLibEvent.cpp.o"
+"CMakeFiles/mysrc.dir/MLibEvent.cpp.o" \
+"CMakeFiles/mysrc.dir/Pub.cpp.o"
 
 # External object files for target mysrc
 mysrc_EXTERNAL_OBJECTS =
 
 ../lib/libmysrc.a: src/CMakeFiles/mysrc.dir/Log.cpp.o
 ../lib/libmysrc.a: src/CMakeFiles/mysrc.dir/MLibEvent.cpp.o
+../lib/libmysrc.a: src/CMakeFiles/mysrc.dir/Pub.cpp.o
 ../lib/libmysrc.a: src/CMakeFiles/mysrc.dir/build.make
 ../lib/libmysrc.a: src/CMakeFiles/mysrc.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/number/SimplyHttpServerBS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library ../../lib/libmysrc.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/number/SimplyHttpServerBS/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library ../../lib/libmysrc.a"
 	cd /home/number/SimplyHttpServerBS/build/src && $(CMAKE_COMMAND) -P CMakeFiles/mysrc.dir/cmake_clean_target.cmake
 	cd /home/number/SimplyHttpServerBS/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mysrc.dir/link.txt --verbose=$(VERBOSE)
 

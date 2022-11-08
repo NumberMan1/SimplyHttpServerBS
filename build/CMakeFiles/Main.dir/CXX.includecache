@@ -30,10 +30,32 @@ map
 Log.h
 ../include/Log.h
 
+../include/Pub.h
+stdlib.h
+-
+stdio.h
+-
+unistd.h
+-
+errno.h
+-
+string.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+strings.h
+-
+ctype.h
+-
+
 /home/number/SimplyHttpServerBS/main.cpp
 MLibEvent.h
 /home/number/SimplyHttpServerBS/MLibEvent.h
 sys/types.h
+-
+sys/stat.h
 -
 unistd.h
 -
@@ -41,4 +63,10 @@ signal.h
 -
 iostream
 -
+cstring
+-
+fcntl.h
+-
+Pub.h
+/home/number/SimplyHttpServerBS/Pub.h
 

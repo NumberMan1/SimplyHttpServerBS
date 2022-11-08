@@ -8,3 +8,6 @@ src/CMakeFiles/mysrc.dir/MLibEvent.cpp.o
  ../include/Log.h
  ../include/MLibEvent.h
  /home/number/SimplyHttpServerBS/src/MLibEvent.cpp
+src/CMakeFiles/mysrc.dir/Pub.cpp.o
+ ../include/Pub.h
+ /home/number/SimplyHttpServerBS/src/Pub.cpp

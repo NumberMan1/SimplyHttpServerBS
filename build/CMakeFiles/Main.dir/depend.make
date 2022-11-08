@@ -3,5 +3,6 @@
 
 CMakeFiles/Main.dir/main.cpp.o: ../include/Log.h
 CMakeFiles/Main.dir/main.cpp.o: ../include/MLibEvent.h
+CMakeFiles/Main.dir/main.cpp.o: ../include/Pub.h
 CMakeFiles/Main.dir/main.cpp.o: ../main.cpp
 

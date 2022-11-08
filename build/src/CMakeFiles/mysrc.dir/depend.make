@@ -8,3 +8,6 @@ src/CMakeFiles/mysrc.dir/MLibEvent.cpp.o: ../include/Log.h
 src/CMakeFiles/mysrc.dir/MLibEvent.cpp.o: ../include/MLibEvent.h
 src/CMakeFiles/mysrc.dir/MLibEvent.cpp.o: ../src/MLibEvent.cpp
 
+src/CMakeFiles/mysrc.dir/Pub.cpp.o: ../include/Pub.h
+src/CMakeFiles/mysrc.dir/Pub.cpp.o: ../src/Pub.cpp
+

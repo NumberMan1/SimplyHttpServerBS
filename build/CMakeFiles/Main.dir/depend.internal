@@ -4,4 +4,5 @@
 CMakeFiles/Main.dir/main.cpp.o
  ../include/Log.h
  ../include/MLibEvent.h
+ ../include/Pub.h
  /home/number/SimplyHttpServerBS/main.cpp

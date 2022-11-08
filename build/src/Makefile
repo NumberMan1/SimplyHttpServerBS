@@ -231,6 +231,33 @@ MLibEvent.cpp.s:
 	cd /home/number/SimplyHttpServerBS/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mysrc.dir/build.make src/CMakeFiles/mysrc.dir/MLibEvent.cpp.s
 .PHONY : MLibEvent.cpp.s
 
+Pub.o: Pub.cpp.o
+
+.PHONY : Pub.o
+
+# target to build an object file
+Pub.cpp.o:
+	cd /home/number/SimplyHttpServerBS/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mysrc.dir/build.make src/CMakeFiles/mysrc.dir/Pub.cpp.o
+.PHONY : Pub.cpp.o
+
+Pub.i: Pub.cpp.i
+
+.PHONY : Pub.i
+
+# target to preprocess a source file
+Pub.cpp.i:
+	cd /home/number/SimplyHttpServerBS/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mysrc.dir/build.make src/CMakeFiles/mysrc.dir/Pub.cpp.i
+.PHONY : Pub.cpp.i
+
+Pub.s: Pub.cpp.s
+
+.PHONY : Pub.s
+
+# target to generate assembly for a file
+Pub.cpp.s:
+	cd /home/number/SimplyHttpServerBS/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mysrc.dir/build.make src/CMakeFiles/mysrc.dir/Pub.cpp.s
+.PHONY : Pub.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -249,6 +276,9 @@ help:
 	@echo "... MLibEvent.o"
 	@echo "... MLibEvent.i"
 	@echo "... MLibEvent.s"
+	@echo "... Pub.o"
+	@echo "... Pub.i"
+	@echo "... Pub.s"
 .PHONY : help
 
 

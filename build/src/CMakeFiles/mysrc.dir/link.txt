@@ -1,2 +1,2 @@
-/usr/bin/ar qc ../../lib/libmysrc.a CMakeFiles/mysrc.dir/Log.cpp.o CMakeFiles/mysrc.dir/MLibEvent.cpp.o
+/usr/bin/ar qc ../../lib/libmysrc.a CMakeFiles/mysrc.dir/Log.cpp.o CMakeFiles/mysrc.dir/MLibEvent.cpp.o CMakeFiles/mysrc.dir/Pub.cpp.o
 /usr/bin/ranlib ../../lib/libmysrc.a

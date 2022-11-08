@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "../../lib/libmysrc.pdb"
   "CMakeFiles/mysrc.dir/Log.cpp.o"
   "CMakeFiles/mysrc.dir/MLibEvent.cpp.o"
+  "CMakeFiles/mysrc.dir/Pub.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

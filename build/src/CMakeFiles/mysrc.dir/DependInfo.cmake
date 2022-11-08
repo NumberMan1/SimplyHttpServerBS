@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/number/SimplyHttpServerBS/src/Log.cpp" "/home/number/SimplyHttpServerBS/build/src/CMakeFiles/mysrc.dir/Log.cpp.o"
   "/home/number/SimplyHttpServerBS/src/MLibEvent.cpp" "/home/number/SimplyHttpServerBS/build/src/CMakeFiles/mysrc.dir/MLibEvent.cpp.o"
+  "/home/number/SimplyHttpServerBS/src/Pub.cpp" "/home/number/SimplyHttpServerBS/build/src/CMakeFiles/mysrc.dir/Pub.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
