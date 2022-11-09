@@ -258,6 +258,33 @@ Pub.cpp.s:
 	cd /home/number/SimplyHttpServerBS/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mysrc.dir/build.make src/CMakeFiles/mysrc.dir/Pub.cpp.s
 .PHONY : Pub.cpp.s
 
+WebOp.o: WebOp.cpp.o
+
+.PHONY : WebOp.o
+
+# target to build an object file
+WebOp.cpp.o:
+	cd /home/number/SimplyHttpServerBS/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mysrc.dir/build.make src/CMakeFiles/mysrc.dir/WebOp.cpp.o
+.PHONY : WebOp.cpp.o
+
+WebOp.i: WebOp.cpp.i
+
+.PHONY : WebOp.i
+
+# target to preprocess a source file
+WebOp.cpp.i:
+	cd /home/number/SimplyHttpServerBS/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mysrc.dir/build.make src/CMakeFiles/mysrc.dir/WebOp.cpp.i
+.PHONY : WebOp.cpp.i
+
+WebOp.s: WebOp.cpp.s
+
+.PHONY : WebOp.s
+
+# target to generate assembly for a file
+WebOp.cpp.s:
+	cd /home/number/SimplyHttpServerBS/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/mysrc.dir/build.make src/CMakeFiles/mysrc.dir/WebOp.cpp.s
+.PHONY : WebOp.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -279,6 +306,9 @@ help:
 	@echo "... Pub.o"
 	@echo "... Pub.i"
 	@echo "... Pub.s"
+	@echo "... WebOp.o"
+	@echo "... WebOp.i"
+	@echo "... WebOp.s"
 .PHONY : help
 
 

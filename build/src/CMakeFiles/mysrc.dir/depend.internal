@@ -11,3 +11,8 @@ src/CMakeFiles/mysrc.dir/MLibEvent.cpp.o
 src/CMakeFiles/mysrc.dir/Pub.cpp.o
  ../include/Pub.h
  /home/number/SimplyHttpServerBS/src/Pub.cpp
+src/CMakeFiles/mysrc.dir/WebOp.cpp.o
+ ../include/Log.h
+ ../include/MLibEvent.h
+ ../include/WebOp.h
+ /home/number/SimplyHttpServerBS/src/WebOp.cpp

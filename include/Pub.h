@@ -1,16 +1,7 @@
 #ifndef PUB_H
 #define PUB_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <strings.h>
-#include <ctype.h>
-
+using size_t = unsigned long;
 
 const char *get_mime_type(const char *name);
 int get_line(int sock, char *buf, int size);

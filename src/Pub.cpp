@@ -1,4 +1,16 @@
 #include "Pub.h"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <strings.h>
+#include <ctype.h>
+
+
 //通过文件名字获得文件类型
 const char *get_mime_type(const char *name)
 {

@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/mysrc.dir/Log.cpp.o"
   "CMakeFiles/mysrc.dir/MLibEvent.cpp.o"
   "CMakeFiles/mysrc.dir/Pub.cpp.o"
+  "CMakeFiles/mysrc.dir/WebOp.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

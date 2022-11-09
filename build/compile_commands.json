@@ -18,5 +18,10 @@
   "directory": "/home/number/SimplyHttpServerBS/build/src",
   "command": "/usr/bin/g++  -I/home/number/SimplyHttpServerBS/include  -g -pg -pthread -O2 -g -Wall -Wextra -pedantic -Werror -std=gnu++2a -o CMakeFiles/mysrc.dir/Pub.cpp.o -c /home/number/SimplyHttpServerBS/src/Pub.cpp",
   "file": "/home/number/SimplyHttpServerBS/src/Pub.cpp"
+},
+{
+  "directory": "/home/number/SimplyHttpServerBS/build/src",
+  "command": "/usr/bin/g++  -I/home/number/SimplyHttpServerBS/include  -g -pg -pthread -O2 -g -Wall -Wextra -pedantic -Werror -std=gnu++2a -o CMakeFiles/mysrc.dir/WebOp.cpp.o -c /home/number/SimplyHttpServerBS/src/WebOp.cpp",
+  "file": "/home/number/SimplyHttpServerBS/src/WebOp.cpp"
 }
 ]
