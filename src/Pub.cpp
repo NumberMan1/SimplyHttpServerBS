@@ -1,14 +1,14 @@
 #include "Pub.h"
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 #include <unistd.h>
-#include <errno.h>
-#include <string.h>
+#include <cerrno>
+#include <cstring>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <strings.h>
-#include <ctype.h>
+#include <cctype>
 
 
 //通过文件名字获得文件类型
@@ -107,13 +107,15 @@ int get_line(int sock, char *buf, int size)
     return(i);
 }
 
-//下面的函数第二天使用
-/*
+
+/* 将中文解码为utf8相应形式
  * 这里的内容是处理%20之类的东西！是"解码"过程。
  * %20 URL编码中的‘ ’(space)
  * %21 '!' %22 '"' %23 '#' %24 '$'
  * %25 '%' %26 '&' %27 ''' %28 '('......
  * 相关知识html中的‘ ’(space)是&nbsp
+ * @param from 来源字符串
+ * @param to 输出字符串
  */
 void strdecode(char *to, char *from)
 {
@@ -121,10 +123,11 @@ void strdecode(char *to, char *from)
 
         if (from[0] == '%' && isxdigit(from[1]) && isxdigit(from[2])) { //依次判断from中 %20 三个字符
 
-            *to = hexit(from[1])*16 + hexit(from[2]);//字符串E8变成了真正的16进制的E8
-            from += 2;                      //移过已经处理的两个字符(%21指针指向1),表达式3的++from还会再向后移一个字符
-        } else
+            *to = hexit(from[1])*16 + hexit(from[2]); //字符串E8变成了真正的16进制的E8
+            from += 2; //移过已经处理的两个字符(%21指针指向1),表达式3的++from还会再向后移一个字符
+        } else {
             *to = *from;
+        }
     }
     *to = '\0';
 }
@@ -132,13 +135,13 @@ void strdecode(char *to, char *from)
 //16进制数转化为10进制, return 0不会出现
 int hexit(char c)
 {
-    if (c >= '0' && c <= '9')
+    if (c >= '0' && c <= '9') {
         return c - '0';
-    if (c >= 'a' && c <= 'f')
+    } else if (c >= 'a' && c <= 'f') {
         return c - 'a' + 10;
-    if (c >= 'A' && c <= 'F')
+    } else if (c >= 'A' && c <= 'F') {
         return c - 'A' + 10;
-
+    }
     return 0;
 }
 

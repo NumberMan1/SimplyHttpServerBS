@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/number/SimplyHttpServerBS/include
 
-CXX_FLAGS =  -g -pg -pthread -O2 -g -Wall -Wextra -pedantic -Werror -std=gnu++2a
+CXX_FLAGS =  -g -pg -pthread -O2 -g -Wall -std=gnu++2a
 

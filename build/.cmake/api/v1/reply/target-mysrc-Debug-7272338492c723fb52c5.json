@@ -61,18 +61,6 @@
 					"fragment" : "-Wall"
 				},
 				{
-					"backtrace" : 2,
-					"fragment" : "-Wextra"
-				},
-				{
-					"backtrace" : 2,
-					"fragment" : "-pedantic"
-				},
-				{
-					"backtrace" : 2,
-					"fragment" : "-Werror"
-				},
-				{
 					"fragment" : "-std=gnu++2a"
 				}
 			],

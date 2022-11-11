@@ -26,9 +26,9 @@ using ListenerCallBack = void (*)(ConListener *_evl,
                                   SockFdType _fd,
                                   sockaddr *_cliaddr,
                                   int _socklen, void *_base);
-using BufferReadCallBack =  void (*)(bufferevent *_bev, void *_ctx);
+using BufferReadCallBack =  void (*)(bufferevent *_bev, void *_arg);
 using BufferWriteCallBack = BufferReadCallBack;
-using BufferEventCallBack = void (*)(bufferevent *_bev, short _what, void *_ctx);
+using BufferEventCallBack = void (*)(bufferevent *_bev, short _what, void *_arg);
 
 /*
 若要想设置持续的读事件则： EV_READ | EV_PERSIST

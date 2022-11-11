@@ -23,7 +23,9 @@ Web::sendMsg(bufferevent *_buffEv, const int &_code,
                               "Content-Length:%d\r\n", _len);
     }
     std::ignore = strcat(sendBuff, "\r\n");
-    std::ignore = bufferevent_write(_buffEv, sendBuff, strlen(sendBuff));
+    if(bufferevent_write(_buffEv, sendBuff, strlen(sendBuff)) == -1) {
+        bufferevent_free(_buffEv);
+    }
 }
 
 void
@@ -47,4 +49,18 @@ Web::sendFile(bufferevent *_buffEv, const char *_fileName) {
         }
     }
     std::ignore = close(fileFD);
+}
+
+void
+Web::evHandle(bufferevent *_buffEv, short _what, void *_arg) {
+    if (_what & BEV_EVENT_EOF) // 连接关闭
+        LOG("连接关闭");
+    else if (_what & BEV_EVENT_ERROR) // 连接错误
+        LOG("some other error\n");
+    else if(_what & BEV_EVENT_CONNECTED) { // 连接成功，回调直接退出
+        LOG("用户连接成功\n");
+        return;
+    }
+    // 运行到这里已经可以确定连接关闭或者错误，则清楚内存。
+    bufferevent_free(_buffEv);
 }

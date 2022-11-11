@@ -3,10 +3,17 @@
 
 #include <fstream>
 #include <string_view>
+#include <chrono>
 
 #define LOG(_message) Log::log((_message), __FILE__, __func__, __LINE__)
 
 namespace Log {
+
+struct Time {
+    static char *Now() noexcept;
+private:
+    static char strTime[40];
+};
 
 // 可以直接使用宏LOG(消息)来给日志文件输入信息
 void log(const std::string_view &_message,
