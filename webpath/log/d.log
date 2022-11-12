@@ -1,57 +1,73 @@
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 13:14:16
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:35:29
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 13:14:32
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:35:50
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 19:23:25
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:35:55
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 19:23:26
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:35:57
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 19:23:37
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:36:00
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 19:23:40
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:64
+时间为: 2022-11-12 08:45:49
+evHandle: some other error
+
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:45:49
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 19:23:41
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:45:54
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:23
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:64
+时间为: 2022-11-12 08:45:56
+evHandle: some other error
+
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:45:56
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:25
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:45:59
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:26
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:45:59
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:28
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:64
+时间为: 2022-11-12 08:46:02
+evHandle: some other error
+
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:46:02
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:29
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:46:03
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:31
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:46:04
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:32
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:46:04
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:35
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:64
+时间为: 2022-11-12 08:46:23
+evHandle: some other error
+
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:46:23
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:35
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:46:25
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:56
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:46:26
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:56
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:46:28
 evHandle: 连接关闭
-info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:57
-时间为: 2022-11-11 23:43:59
+info: /home/number/SimplyHttpServerBS/src/WebOp.cpp:62
+时间为: 2022-11-12 08:46:28
 evHandle: 连接关闭

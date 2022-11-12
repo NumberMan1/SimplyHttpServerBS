@@ -22,3 +22,4 @@ void Log::log(const std::string_view &_message,
         << "时间为: " << Time::Now() << '\n'
         << _func << ": " << _message << '\n';
 }
+

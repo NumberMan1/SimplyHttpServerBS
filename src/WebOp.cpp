@@ -45,7 +45,12 @@ Web::sendFile(bufferevent *_buffEv, const char *_fileName) {
         } else if (len == 0) {
             break;
         } else {
-            std::ignore = bufferevent_write(_buffEv, fileData, len);
+            if (bufferevent_write(_buffEv, fileData, len) == -1 ) {
+                bufferevent_free(_buffEv);
+                LOG("发送失败");
+                close(fileFD);
+                return;
+            }
         }
     }
     std::ignore = close(fileFD);
@@ -57,6 +62,8 @@ Web::evHandle(bufferevent *_buffEv, short _what, void *_arg) {
         LOG("连接关闭");
     else if (_what & BEV_EVENT_ERROR) // 连接错误
         LOG("some other error\n");
+    else if (_what & BEV_EVENT_WRITING) 
+        LOG("写入出错");
     else if(_what & BEV_EVENT_CONNECTED) { // 连接成功，回调直接退出
         LOG("用户连接成功\n");
         return;

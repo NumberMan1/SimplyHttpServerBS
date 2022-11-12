@@ -22,10 +22,15 @@ void listenerCB(ConListener *_evl, SockFdType _fd,
 void sigintCB(evutil_socket_t _x, short _events, void *_arg);
 void bufReadCB(bufferevent *_buffEv, void *_arg);
 void bufWriteCB(bufferevent *_buffEv, void *_arg);
+void http_request(bufferevent *_buffEv, char *_path);
+bool sendDir(bufferevent *_buffEv, const char *_strPath);
 
 } // !namespace
 
 int main(int argc, char *argv[]) {
+    struct sigaction s;
+    s.sa_handler = SIG_IGN;
+    sigaction(SIGPIPE, &s, nullptr);
 	//改变当前进程的工作目录
     char path[255] = {0};
     std::ignore = sprintf(path, "%s", getenv("PWD"));
@@ -67,68 +72,80 @@ void sigintCB(evutil_socket_t _x, short _events, void *_arg) {
     }
 }
 
+bool sendDir(bufferevent *_buffEv, const char *_strPath) {
+    Web::sendFile(_buffEv, "html/dir_header.html");
+    dirent **dirPPtr = nullptr;
+    // 用dirPPtr申请dir的空间
+    int dirNum = scandir(_strPath, &dirPPtr, nullptr, alphasort);
+    if (dirNum < 0) {
+        LOG("访问目录出错");
+        return false;
+    }
+    for (int i = 0; i != dirNum; ++i) {
+        std::cout << dirPPtr[i]->d_name << std::endl;
+        int len;
+        char files[1024]{0};
+        if (dirPPtr[i]->d_type == DT_DIR) { // 如果是目录需要加/
+            len = sprintf(files, "<li><a href=\"%s/\"> %s </a></li>",
+                          dirPPtr[i]->d_name, dirPPtr[i]->d_name);
+        } else {
+            len = sprintf(files, "<li><a href=\"%s\"> %s </a></li>",
+                          dirPPtr[i]->d_name, dirPPtr[i]->d_name);
+        }
+        // 记得free 空间
+        free(dirPPtr[i]);
+        if (bufferevent_write(_buffEv, files, len) == -1) {
+            bufferevent_free(_buffEv);
+        }
+    }
+    Web::sendFile(_buffEv, "html/dir_tail.html");
+    return true;
+}
 
+bool httpRequest(bufferevent *_buffEv, char *_path) {
+    const char *strFile = _path;
+    if(strcmp(strFile, "/") == 0 ||
+       strcmp(strFile, "/.") == 0) {
+        strFile = "./"; // 如果访问的是默认目录的话
+    } else {
+        strFile = _path + 1; // 忽略文件名的第一个/
+    }
+    struct stat st;
+    if (stat(strFile, &st) < 0) { // 文件不存在
+        LOG("文件不存在或用户离开");
+        Web::sendMsg(_buffEv, 404, "NOT FOUND", get_mime_type(".html"), 0);
+        Web::sendFile(_buffEv, "html/error.html");
+        return false;
+    } else {
+        if (S_ISREG(st.st_mode)) { // 为普通文件
+            std::cout << "请求普通文件中" << std::endl;
+            Web::sendMsg(_buffEv, 200, "OK", get_mime_type(strFile), st.st_size);
+            Web::sendFile(_buffEv, strFile);
+        } else if (S_ISDIR(st.st_mode)) { // 访问目录
+            std::cout << "访问目录文件" << std::endl;
+            Web::sendMsg(_buffEv, 200, "OK", get_mime_type(".html"), st.st_size);
+            sendDir(_buffEv, strFile);
+        }
+    }
+    return true;
+}
 
 void bufReadCB(bufferevent *_buffEv, void *_arg) {
     char buf[1024] {0};
     int check = bufferevent_read(_buffEv,
          reinterpret_cast<void*>(buf), sizeof(buf)
     );
-    if (check == -1) {
-        bufferevent_free(_buffEv);
-    }
-    std::cout << buf << std::endl;
-    char reqType[16] {0}; // GET
-    char fileName[100] {0}; // /a.text
-    char protocal[200] {0}; // HTTP/1.1
-	std::ignore = sscanf(buf, "%[^ ] %[^ ] %[^ \r\n]", reqType, fileName, protocal);
-    strdecode(fileName, fileName);
-    std::cout << reqType << '\n'
-              << fileName << '\n'
-              << protocal << std::endl;
-    if (strcasecmp(reqType, "get") == 0) {
-        char *strFile = fileName;
-        if (strlen(strFile) <= 1) { // 如果访问的是默认目录
-            strcpy(strFile, "./");
-        } else {
-            strFile = fileName + 1; // 忽略文件名的第一个/
-        }
-        struct stat st;
-        if (stat(strFile, &st) < 0) { // 文件不存在
-            LOG("文件不存在或用户离开");
-            Web::sendMsg(_buffEv, 404, "NOT FOUND", get_mime_type(".html"), 0);
-            Web::sendFile(_buffEv, "html/error.html");
-            return;
-        } else {
-            if (S_ISREG(st.st_mode)) { // 为普通文件
-                std::cout << "请求普通文件中" << std::endl;
-                Web::sendMsg(_buffEv, 200, "OK", get_mime_type(strFile), st.st_size);
-                Web::sendFile(_buffEv, strFile);
-            } else if (S_ISDIR(st.st_mode)) { // 访问目录
-                std::cout << "访问目录文件" << std::endl;
-                Web::sendMsg(_buffEv, 200, "OK", get_mime_type(".html"), st.st_size);
-                Web::sendFile(_buffEv, "html/dir_header.html");
-
-                dirent **dirPPtr = nullptr;
-                // 用dirPPtr申请dir的空间
-                int dirNum = scandir(strFile, &dirPPtr, nullptr, alphasort);
-                for (int i = 0; i != dirNum; ++i) {
-                    std::cout << dirPPtr[i]->d_name << std::endl;
-                    int len;
-                    char files[1024]{0};
-                    if (dirPPtr[i]->d_type == DT_DIR) { // 如果是目录需要加/
-                        len = sprintf(files, "<li><a href=\"%s/\"> %s </a></li>",
-                                      dirPPtr[i]->d_name, dirPPtr[i]->d_name);
-                    } else {
-                        len = sprintf(files, "<li><a href=\"%s\"> %s </a></li>",
-                                      dirPPtr[i]->d_name, dirPPtr[i]->d_name);
-                    }
-                    bufferevent_write(_buffEv, files, len);
-                    // 记得free 空间
-                    free(dirPPtr[i]);
-                }
-                Web::sendFile(_buffEv, "html/dir_tail.html");
+    if (check > 0) {
+        char reqType[10] {0}; // GET
+        char fileName[256] {0}; // /a.text
+        char protocal[20] {0}; // HTTP/1.1
+    	std::ignore = sscanf(buf, "%[^ ] %[^ ] %[^ \r\n]", reqType, fileName, protocal);
+        strdecode(fileName, fileName);
+        if (strcasecmp(reqType, "get") == 0) {
+            while(bufferevent_read(_buffEv, buf, sizeof(buf)) > 0){
+                std::cout << buf << std::endl;
             }
+            httpRequest(_buffEv, fileName);
         }
     }
 }
