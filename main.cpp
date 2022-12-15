@@ -1,12 +1,13 @@
 ﻿#include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
+// #include <unistd.h>
 #include <fcntl.h>
 #include <signal.h>
 #include <dirent.h>
 
 #include <iostream>
 #include <cstring>
+#include <filesystem>
 
 #include "MLibEvent.h"
 #include "Pub.h"
@@ -32,11 +33,22 @@ int main(int argc, char *argv[]) {
     s.sa_handler = SIG_IGN;
     sigaction(SIGPIPE, &s, nullptr);
 	//改变当前进程的工作目录
-    char path[255] = {0};
-    std::ignore = sprintf(path, "%s", getenv("PWD"));
-    std::ignore = strcat(path, "/webpath");
-    std::ignore = chdir(path);
-    std::cout << "当前工作目录为" << path << std::endl;
+    // old style
+
+    // char path[255] = {0};
+    // std::ignore = sprintf(path, "%s", getenv("PWD"));
+    // std::ignore = strcat(path, "/webpath");
+    // std::ignore = chdir(path);
+    // std::cout << "当前工作目录为" << path << std::endl;
+
+    // C++17 style
+
+    std::filesystem::path path = std::filesystem::current_path();
+    std::cout << "以前工作目录为" << path << std::endl;
+    path.append("webpath");
+    std::filesystem::current_path(path);
+    std::cout << std::filesystem::current_path() << std::endl;
+
     std::ignore = EventHandler::instance(::listenerCB);
     EventHandler::mInstance->addSignal(SIGINT, ::sigintCB,
         EventHandler::mInstance->getBase(), nullptr
