@@ -17,6 +17,9 @@ using namespace MEvent;
 
 namespace {
 
+// 系统默认的目录大小为4096字节
+constexpr std::size_t kTheSizeOfTheDirectory = 4096; 
+
 // LibEvent的回调函数
 void listenerCB(ConListener *_evl, SockFdType _fd,
                 sockaddr *_cliaddr, int _socklen, void *_base);
@@ -42,7 +45,6 @@ int main(int argc, char *argv[]) {
     // std::cout << "当前工作目录为" << path << std::endl;
 
     // C++17 style
-
     std::filesystem::path path = std::filesystem::current_path();
     std::cout << "以前工作目录为" << path << std::endl;
     path.append("webpath");
@@ -85,36 +87,62 @@ void sigintCB(evutil_socket_t _x, short _events, void *_arg) {
 }
 
 bool sendDir(bufferevent *_buffEv, const char *_strPath) {
+    using namespace std::filesystem;
     Web::sendFile(_buffEv, "html/dir_header.html");
-    dirent **dirPPtr = nullptr;
-    // 用dirPPtr申请dir的空间
-    int dirNum = scandir(_strPath, &dirPPtr, nullptr, alphasort);
-    if (dirNum < 0) {
-        LOG("访问目录出错");
-        return false;
-    }
-    for (int i = 0; i != dirNum; ++i) {
-        std::cout << dirPPtr[i]->d_name << std::endl;
-        int len;
-        char files[1024]{0};
-        if (dirPPtr[i]->d_type == DT_DIR) { // 如果是目录需要加/
+
+    // C++ 17
+    for (const auto &entry : directory_iterator(_strPath)) {
+        std::string file_name(entry.path());
+        if (std::size_t pos = file_name.rfind("/")) {
+            file_name.replace(0, pos + 1, "");
+        }
+        int len {0};
+        char files[1024] {0};
+        if (is_directory(entry)) {
             len = sprintf(files, "<li><a href=\"%s/\"> %s </a></li>",
-                          dirPPtr[i]->d_name, dirPPtr[i]->d_name);
+                        //   entry.path().c_str(), entry.path().c_str());
+                          file_name.c_str(), file_name.c_str());
         } else {
             len = sprintf(files, "<li><a href=\"%s\"> %s </a></li>",
-                          dirPPtr[i]->d_name, dirPPtr[i]->d_name);
+                        //   entry.path().c_str(), entry.path().c_str());
+                          file_name.c_str(), file_name.c_str());
         }
-        // 记得free 空间
-        free(dirPPtr[i]);
         if (bufferevent_write(_buffEv, files, len) == -1) {
             bufferevent_free(_buffEv);
-        }
+        }   
     }
+
+    // // old style
+    // dirent **dirPPtr = nullptr;
+    // // 用dirPPtr申请dir的空间
+    // int dirNum = scandir(_strPath, &dirPPtr, nullptr, alphasort);
+    // if (dirNum < 0) {
+    //     LOG("访问目录出错");
+    //     return false;
+    // }
+    // for (int i = 0; i != dirNum; ++i) {
+    //     std::cout << dirPPtr[i]->d_name << std::endl;
+    //     int len;
+    //     char files[1024] {0};
+    //     if (dirPPtr[i]->d_type == DT_DIR) { // 如果是目录需要加/
+    //         len = sprintf(files, "<li><a href=\"%s/\"> %s </a></li>",
+    //                       dirPPtr[i]->d_name, dirPPtr[i]->d_name);
+    //     } else {
+    //         len = sprintf(files, "<li><a href=\"%s\"> %s </a></li>",
+    //                       dirPPtr[i]->d_name, dirPPtr[i]->d_name);
+    //     }
+    //     // 记得free 空间
+    //     free(dirPPtr[i]);
+    //     if (bufferevent_write(_buffEv, files, len) == -1) {
+    //         bufferevent_free(_buffEv);
+    //     }
+    // }
     Web::sendFile(_buffEv, "html/dir_tail.html");
     return true;
 }
 
 bool httpRequest(bufferevent *_buffEv, char *_path) {
+    using namespace std::filesystem;
     const char *strFile = _path;
     if(strcmp(strFile, "/") == 0 ||
        strcmp(strFile, "/.") == 0) {
@@ -122,23 +150,46 @@ bool httpRequest(bufferevent *_buffEv, char *_path) {
     } else {
         strFile = _path + 1; // 忽略文件名的第一个/
     }
-    struct stat st;
-    if (stat(strFile, &st) < 0) { // 文件不存在
+
+    // C++ 17
+    std::cout << strFile << std::endl;
+    if (!exists(strFile)) {
         LOG("文件不存在或用户离开");
         Web::sendMsg(_buffEv, 404, "NOT FOUND", get_mime_type(".html"), 0);
         Web::sendFile(_buffEv, "html/error.html");
         return false;
     } else {
-        if (S_ISREG(st.st_mode)) { // 为普通文件
+        if (is_regular_file(strFile)) {
             std::cout << "请求普通文件中" << std::endl;
-            Web::sendMsg(_buffEv, 200, "OK", get_mime_type(strFile), st.st_size);
+            Web::sendMsg(_buffEv, 200, "OK", get_mime_type(strFile),
+                         directory_entry(strFile).file_size());
             Web::sendFile(_buffEv, strFile);
-        } else if (S_ISDIR(st.st_mode)) { // 访问目录
+        } else if (is_directory(strFile)) {
             std::cout << "访问目录文件" << std::endl;
-            Web::sendMsg(_buffEv, 200, "OK", get_mime_type(".html"), st.st_size);
+            Web::sendMsg(_buffEv, 200, "OK", get_mime_type(".html"),
+                         ::kTheSizeOfTheDirectory);
             sendDir(_buffEv, strFile);
         }
     }
+
+    // // old style
+    // struct stat st;
+    // if (stat(strFile, &st) < 0) { // 文件不存在
+    //     LOG("文件不存在或用户离开");
+    //     Web::sendMsg(_buffEv, 404, "NOT FOUND", get_mime_type(".html"), 0);
+    //     Web::sendFile(_buffEv, "html/error.html");
+    //     return false;
+    // } else {
+    //     if (S_ISREG(st.st_mode)) { // 为普通文件
+    //         std::cout << "请求普通文件中" << std::endl;
+    //         Web::sendMsg(_buffEv, 200, "OK", get_mime_type(strFile), st.st_size);
+    //         Web::sendFile(_buffEv, strFile);
+    //     } else if (S_ISDIR(st.st_mode)) { // 访问目录
+    //         std::cout << "访问目录文件" << std::endl;
+    //         Web::sendMsg(_buffEv, 200, "OK", get_mime_type(".html"), st.st_size);
+    //         sendDir(_buffEv, strFile);
+    //     }
+    // }
     return true;
 }
 
